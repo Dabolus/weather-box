@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "rootDir": ".",
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "strictNullChecks": false,
+    "allowJs": true,
+    "checkJs": true,
+    "esModuleInterop": true,
+    "lib": [
+      "dom",
+      "esnext"
+    ],
+    "target": "es5",
+    "moduleResolution": "node",
+    "resolveJsonModule": true
+  },
+  "include": [
+    "typings.d.ts",
+    "src/**/*.ts"
+  ]
+}
