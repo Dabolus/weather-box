@@ -1,3 +1,193 @@
-body {
-  background: black;
+@import './product-sans';
+@import './weather';
+@import './rain';
+@import './snow';
+@import './thunders';
+@import './clouds';
+@import './settings';
+
+* {
+  box-sizing: border-box;
+  user-select: none;
+  font-family: 'Product Sans', 'Roboto', 'Noto', sans-serif;
+  color: white;
+  text-shadow: 0 0 .4vw rgba(0, 0, 0, .75);
+  line-height: 1;
+}
+
+input, textarea {
+  border-radius: 4px;
+  transition: .2s box-shadow;
+
+  &:focus {
+    box-shadow: 0 0 12px rgba(0, 128, 255, .5);
+  }
+}
+
+html, body, #sky, #night, #stars, #loading, #weatherBox {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#loading {
+  z-index: 200;
+  text-align: center;
+  line-height: 100vh;
+  font-size: 5vw;
+  background: linear-gradient(to bottom, #b0dcee 0%, #b0dcee 75%, #80c145 100%);
+  transition: 1s opacity;
+
+  &:after {
+    display: inline-block;
+    animation: dotty steps(1, end) 1s infinite;
+    white-space: pre;
+    width: 1vw;
+    content: '   ';
+  }
+}
+
+html.wf-active #loading.hidden {
+  opacity: 0;
+}
+
+@keyframes dotty {
+  0%, 100% { content: '   '; }
+  25% { content: '.  '; }
+  50% { content: '.. '; }
+  75% { content: '...'; }
+}
+
+#clock, #day, #location, #extra {
+  position: absolute;
+  right: 2vw;
+  text-align: right;
+  z-index: 100;
+}
+
+#clock {
+  top: 2vw;
+  font-size: 8vw;
+}
+
+#ampm {
+  font-size: .5em;
+}
+
+#day {
+  top: 10vw;
+  font-size: 4vw;
+}
+
+#location {
+  top: 15vw;
+  font-size: 4vw;
+}
+
+#extra {
+  top: 20vw;
+
+  > * {
+    display: inline-block;
+  }
+}
+
+#temperature {
+  font-size: 4vw;
+}
+
+#weather {
+  font-size: 6vw;
+  margin-left: .5vw;
+}
+
+#compass {
+  width: 4vw;
+  margin-left: 1vw;
+  fill: white;
+  transform: translateY(.5vw);
+
+  #needle {
+    transform-origin: 50% 50%;
+    transition: 1s transform;
+  }
+}
+
+#sky {
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACAQMAAACjTyRkAAAABlBMVEVju98AAAAyJ1TxAAAAAnRSTlOAAE0QVXMAAAAMSURBVAjXY2BgaAAAAIQAgRhW8c0AAAAASUVORK5CYII=') repeat-x top left;
+  background-size: 100vw 100vh;
+  z-index: 1;
+}
+
+#sun {
+  position: absolute;
+  left: 45vw;
+  width: 10vw;
+  z-index: 4;
+  transition: .2s top;
+}
+
+.sun-ray {
+  position: absolute;
+  width: 1vw;
+  height: 3vw;
+  transform: scaleY(0);
+  transform-origin: center bottom;
+  transition: .25s transform;
+  z-index: 3;
+}
+
+#ground {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 20vh;
+  background: transparent url(../images/ground.svg) repeat-x bottom center;
+  // Awful trick to give continuity to the ground
+  background-size: calc(20vh / 171 * 1225) 20vh;
+  z-index: 5;
+}
+
+#weather-box {
+  height: 200vh;
+  transform-origin: center top;
+  z-index: 6;
+}
+
+#night {
+  background-color: rgba(0, 0, 0, .8);
+  z-index: 2;
+}
+
+#stars {
+  background: transparent url(../images/stars.svg) repeat bottom center;
+  z-index: 3;
+}
+
+#moon {
+  position: absolute;
+  left: 45vw;
+  width: 10vw;
+  top: 60vh;
+  z-index: 3;
+  fill: #ff8;
+  transition: .2s top;
+}
+
+.full-screen {
+  transform-origin: center top;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 200vh;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
 }
