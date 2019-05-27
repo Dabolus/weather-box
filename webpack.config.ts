@@ -67,6 +67,21 @@ const config: webpack.Configuration = {
           loader: 'babel-loader',
           options: {
             cacheDirectory: true,
+            presets: [
+              ['@babel/env', {
+                loose: true,
+                useBuiltIns: 'usage',
+                modules: false,
+                corejs: 3,
+              }],
+              '@babel/typescript',
+            ],
+            plugins: [
+              ['@babel/transform-runtime', {
+                corejs: 3,
+                sourceType: 'unambiguous',
+              }],
+            ],
           },
         },
       },
